@@ -1,0 +1,45 @@
+title: Termin
+extends@: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          title: Inhalt
+          fields:
+            title:
+              type: text
+              label: Titel
+              validate:
+                required: true
+
+            header.event_date:
+              type: date
+              label: Datum
+              validate:
+                required: true
+
+            header.event_time:
+              type: text
+              label: Uhrzeit
+              placeholder: 'z.B. 18:00'
+
+            header.event_location:
+              type: text
+              label: Ort
+              placeholder: 'z.B. j@m, Hauptplatz 1, Kremsmünster'
+
+            content:
+              type: markdown-editor
+              label: Beschreibung
+
+            image:
+              type: file
+              label: Bild (optional)
+              destination: '@self'
+              accept:
+                - image/*

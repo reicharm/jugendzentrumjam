@@ -1,0 +1,63 @@
+{% include 'partials/header.html.twig' %}
+
+<section class="intro">
+    <h1>{{ page.title }}</h1>
+    <div class="page-content">{{ page.content }}</div>
+</section>
+
+{% set news_page = page.find('/neuigkeiten') %}
+{% set event_page = page.find('/termine') %}
+
+<section class="home-section">
+    <h2>Aktuelle Neuigkeiten</h2>
+    {% if news_page %}
+        {% set news_items = news_page.collection.order('date', 'desc')|slice(0, config.theme.home_news_count) %}
+        {% if news_items|length %}
+            <ul class="teaser-list">
+                {% for item in news_items %}
+                    <li class="teaser">
+                        <a href="{{ item.url }}">
+                            <span class="teaser-date">{{ item.date|date('d.m.Y') }}</span>
+                            <span class="teaser-title">{{ item.title }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aktuell keine Neuigkeiten.</p>
+        {% endif %}
+    {% endif %}
+    <a class="more-link" href="{{ base_url }}/neuigkeiten">Alle Neuigkeiten &rarr;</a>
+</section>
+
+<section class="home-section">
+    <h2>Nächste Termine</h2>
+    {% if event_page %}
+        {% set event_items = event_page.collection.order('header.event_date', 'asc') %}
+        {% set upcoming = [] %}
+        {% for item in event_items %}
+            {% if item.header.event_date and item.header.event_date|date('U') >= "now"|date('U') %}
+                {% set upcoming = upcoming|merge([item]) %}
+            {% endif %}
+        {% endfor %}
+        {% set upcoming = upcoming|slice(0, config.theme.home_events_count) %}
+        {% if upcoming|length %}
+            <ul class="teaser-list">
+                {% for item in upcoming %}
+                    <li class="teaser">
+                        <a href="{{ item.url }}">
+                            <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}{% if item.header.event_time %}, {{ item.header.event_time }}{% endif %}</span>
+                            <span class="teaser-title">{{ item.title }}</span>
+                            {% if item.header.event_location %}<span class="teaser-location">{{ item.header.event_location }}</span>{% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aktuell keine anstehenden Termine.</p>
+        {% endif %}
+    {% endif %}
+    <a class="more-link" href="{{ base_url }}/termine">Alle Termine &rarr;</a>
+</section>
+
+{% include 'partials/footer.html.twig' %}

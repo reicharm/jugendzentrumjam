@@ -1,0 +1,9 @@
+enabled: true
+
+# Theme-Einstellungen für das j@m Jugendimpulszentrum
+site_title: 'JugendImpulsZentrum j@m'
+site_claim: 'Kremsmünster'
+
+# Anzahl der Einträge, die auf der Startseite angezeigt werden
+home_news_count: 4
+home_events_count: 4

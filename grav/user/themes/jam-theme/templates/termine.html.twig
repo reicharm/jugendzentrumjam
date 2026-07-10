@@ -1,0 +1,49 @@
+{% include 'partials/header.html.twig' %}
+
+<h1>{{ page.title }}</h1>
+
+{% set all_items = page.collection.order('header.event_date', 'asc') %}
+{% set upcoming = [] %}
+{% set past = [] %}
+{% for item in all_items %}
+    {% if item.header.event_date and item.header.event_date|date('U') >= "today"|date('U') %}
+        {% set upcoming = upcoming|merge([item]) %}
+    {% else %}
+        {% set past = past|merge([item]) %}
+    {% endif %}
+{% endfor %}
+
+<h2>Anstehende Termine</h2>
+{% if upcoming|length %}
+    <ul class="content-list">
+        {% for item in upcoming %}
+            <li class="content-list-entry">
+                <a href="{{ item.url }}">
+                    <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}{% if item.header.event_time %}, {{ item.header.event_time }}{% endif %}</span>
+                    <span class="teaser-title">{{ item.title }}</span>
+                </a>
+                {% if item.header.event_location %}<p class="teaser-location">{{ item.header.event_location }}</p>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aktuell keine anstehenden Termine.</p>
+{% endif %}
+
+{% if past|length %}
+    <details class="past-events">
+        <summary>Vergangene Termine</summary>
+        <ul class="content-list">
+            {% for item in past|reverse %}
+                <li class="content-list-entry">
+                    <a href="{{ item.url }}">
+                        <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}</span>
+                        <span class="teaser-title">{{ item.title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </details>
+{% endif %}
+
+{% include 'partials/footer.html.twig' %}

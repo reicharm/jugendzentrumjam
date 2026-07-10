@@ -1,0 +1,29 @@
+title: Neuigkeit
+extends@: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          title: Inhalt
+          fields:
+            title:
+              type: text
+              label: Titel
+              validate:
+                required: true
+
+            content:
+              type: markdown-editor
+              label: Text
+
+            image:
+              type: file
+              label: Bild (optional)
+              destination: '@self'
+              accept:
+                - image/*
