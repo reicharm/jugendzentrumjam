@@ -1,0 +1,52 @@
+{% include 'partials/header.html.twig' %}
+
+<article class="page">
+    <h1>{{ page.title }}</h1>
+    <div class="page-content">{{ page.content }}</div>
+</article>
+
+{% if page.header.team|length %}
+<section class="home-section">
+    <h2>Unsere Mitarbeitenden</h2>
+    <ul class="people-grid">
+        {% for person in page.header.team %}
+            <li class="person-card">
+                {% if person.photo and page.media[person.photo] %}
+                    <img class="person-photo" src="{{ page.media[person.photo].cropZoom(400, 400).url }}" alt="{{ person.name }}" loading="lazy">
+                {% else %}
+                    <div class="person-photo"></div>
+                {% endif %}
+                <div class="person-body">
+                    <p class="person-name">{{ person.name }}</p>
+                    {% if person.role %}<p class="person-role">{{ person.role }}</p>{% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+{% if page.header.rooms|length %}
+<section class="home-section">
+    <h2>Unsere Räume</h2>
+    <ul class="rooms-grid">
+        {% for room in page.header.rooms %}
+            <li class="room-card">
+                {% if room.photo and page.media[room.photo] %}
+                    <img class="room-photo" src="{{ page.media[room.photo].cropZoom(600, 450).url }}" alt="{{ room.name }}" loading="lazy">
+                {% else %}
+                    <div class="room-photo"></div>
+                {% endif %}
+                <div class="room-body">
+                    <p class="room-name">{{ room.name }}</p>
+                    {% if room.description %}<p class="room-desc">{{ room.description }}</p>{% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+{% include 'partials/instagram.html.twig' %}
+
+{% include 'partials/footer.html.twig' %}

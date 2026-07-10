@@ -1,0 +1,12 @@
+<section class="instagram-section">
+    <h2>Folgt uns auf Instagram</h2>
+    <p>Die meisten Fotos, Stories und spontanen Updates gibt's zuerst bei uns auf Insta.</p>
+    <a class="instagram-cta" href="https://www.instagram.com/{{ config.theme.instagram_handle }}/" target="_blank" rel="noopener">
+        @{{ config.theme.instagram_handle }} ansehen
+    </a>
+    {% if config.theme.instagram_embed_html %}
+        <div class="instagram-embed">
+            {{ config.theme.instagram_embed_html|raw }}
+        </div>
+    {% endif %}
+</section>

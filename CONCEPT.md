@@ -55,6 +55,15 @@ grav/
 
 Siehe `grav/README.md` für die konkrete Installationsanleitung auf eurem Webhosting.
 
+## Update: Zielgruppe Jugendliche + Instagram
+
+Nach Rückmeldung wurde das Grundgerüst angepasst:
+
+- **Bildlastige Neuigkeiten:** Jeder Beitrag bekommt ein großes Titelbild, das auf Startseite, Übersicht und im Beitrag prominent erscheint (statt reiner Textliste) – Neuigkeiten funktionieren damit wie ein Blog.
+- **Über uns** stellt jetzt Mitarbeitende (Foto, Name, Rolle) und Räume (Foto, Name, Beschreibung) als Kacheln vor, beliebig erweiterbar über das Admin-Panel.
+- **Instagram:** Footer und Startseite verlinken auf `@jamkremsmuenster`; optional lässt sich ein echter Live-Feed per kostenlosem Widget-Dienst (z. B. Elfsight/SnapWidget) einbinden, ohne Code anzufassen (siehe `grav/README.md`, Abschnitt 6). Ein direkter automatischer Abruf des Instagram-Designs war nicht möglich, da Instagram externe Zugriffe blockiert.
+- **Design "Dschungel-Lounge":** tiefes Grün, Logo-Orange und warmes Creme, bewusst kontrastreicher und bildlastiger als eine reine "Vereinsseite" – siehe Design-Vorschläge-Artefakt für die Herleitung aus Logo und Fotos des Zentrums.
+
 ## Offene Punkte (folgen später laut Rückmeldung)
 
 - Logo, Bildmaterial, Farbwelt → aktuell Platzhalter-Design (neutral, mobil-optimiert), leicht austauschbar über `assets/css/theme.css`.

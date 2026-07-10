@@ -23,7 +23,13 @@ form:
 
             image:
               type: file
-              label: Bild (optional)
+              label: Titelbild
+              help: 'Wird groß auf der Startseite, der Übersicht und im Beitrag angezeigt. Querformat empfohlen – ohne Bild bleibt die Fläche leer.'
               destination: '@self'
               accept:
                 - image/*
+
+            header.author:
+              type: text
+              label: Verfasst von
+              placeholder: 'z.B. Anna'

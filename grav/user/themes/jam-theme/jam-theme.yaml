@@ -7,3 +7,10 @@ site_claim: 'Kremsmünster'
 # Anzahl der Einträge, die auf der Startseite angezeigt werden
 home_news_count: 4
 home_events_count: 4
+
+# Instagram
+instagram_handle: 'jamkremsmuenster'
+# Optional: Embed-Code eines Feed-Widgets (z.B. von elfsight.com oder snapwidget.com,
+# kostenloser Tarif reicht). Einfach den <script>/<div>-Code des Anbieters hier einfügen,
+# dann erscheint der echte Insta-Feed auf der Startseite. Leer lassen für nur den Folgen-Button.
+instagram_embed_html: ''

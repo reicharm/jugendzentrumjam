@@ -13,16 +13,24 @@
     {% if news_page %}
         {% set news_items = news_page.collection.order('date', 'desc')|slice(0, config.theme.home_news_count) %}
         {% if news_items|length %}
-            <ul class="teaser-list">
+            <div class="news-grid">
                 {% for item in news_items %}
-                    <li class="teaser">
+                    <article class="news-card">
                         <a href="{{ item.url }}">
-                            <span class="teaser-date">{{ item.date|date('d.m.Y') }}</span>
-                            <span class="teaser-title">{{ item.title }}</span>
+                            {% if item.media.images|length %}
+                                <img class="news-card-image" src="{{ (item.media.images|first).value.cropZoom(600, 450).url }}" alt="{{ item.title }}" loading="lazy">
+                            {% else %}
+                                <div class="news-card-image"></div>
+                            {% endif %}
+                            <div class="news-card-body">
+                                <span class="news-card-date">{{ item.date|date('d.m.Y') }}</span>
+                                <h3 class="news-card-title">{{ item.title }}</h3>
+                                {% if item.summary %}<p class="news-card-excerpt">{{ item.summary|striptags }}</p>{% endif %}
+                            </div>
                         </a>
-                    </li>
+                    </article>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <p>Aktuell keine Neuigkeiten.</p>
         {% endif %}
@@ -42,13 +50,21 @@
         {% endfor %}
         {% set upcoming = upcoming|slice(0, config.theme.home_events_count) %}
         {% if upcoming|length %}
-            <ul class="teaser-list">
+            <ul class="event-list">
                 {% for item in upcoming %}
-                    <li class="teaser">
-                        <a href="{{ item.url }}">
-                            <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}{% if item.header.event_time %}, {{ item.header.event_time }}{% endif %}</span>
-                            <span class="teaser-title">{{ item.title }}</span>
-                            {% if item.header.event_location %}<span class="teaser-location">{{ item.header.event_location }}</span>{% endif %}
+                    <li class="event-row">
+                        <a href="{{ item.url }}" style="display:flex; align-items:center; gap:1rem; flex:1;">
+                            <span class="event-date-badge">
+                                <span class="day">{{ item.header.event_date|date('d') }}</span>
+                                <span class="month">{{ item.header.event_date|date('M') }}</span>
+                            </span>
+                            <span>
+                                <span class="event-title">{{ item.title }}</span>
+                                <p class="event-meta">
+                                    {% if item.header.event_time %}{{ item.header.event_time }} Uhr{% endif %}
+                                    {% if item.header.event_location %} &middot; {{ item.header.event_location }}{% endif %}
+                                </p>
+                            </span>
                         </a>
                     </li>
                 {% endfor %}
@@ -59,5 +75,7 @@
     {% endif %}
     <a class="more-link" href="{{ base_url }}/termine">Alle Termine &rarr;</a>
 </section>
+
+{% include 'partials/instagram.html.twig' %}
 
 {% include 'partials/footer.html.twig' %}
