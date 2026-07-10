@@ -1,0 +1,17 @@
+{% include 'partials/header.html.twig' %}
+
+<article class="single-entry">
+    <p class="teaser-date">
+        {{ page.header.event_date|date('d.m.Y') }}{% if page.header.event_time %}, {{ page.header.event_time }} Uhr{% endif %}
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.header.event_location %}<p class="teaser-location">📍 {{ page.header.event_location }}</p>{% endif %}
+    {% if page.media.images|length %}
+        {% set image = page.media.images|first %}
+        <img class="single-entry-image" src="{{ image.value.cropZoom(1200, 600).url }}" alt="{{ page.title }}">
+    {% endif %}
+    <div class="page-content">{{ page.content }}</div>
+    <p><a href="{{ base_url }}/termine">&larr; Zurück zu allen Terminen</a></p>
+</article>
+
+{% include 'partials/footer.html.twig' %}

@@ -1,0 +1,22 @@
+{% include 'partials/header.html.twig' %}
+
+<h1>{{ page.title }}</h1>
+
+{% set news_items = page.collection.order('date', 'desc') %}
+{% if news_items|length %}
+    <ul class="content-list">
+        {% for item in news_items %}
+            <li class="content-list-entry">
+                <a href="{{ item.url }}">
+                    <span class="teaser-date">{{ item.date|date('d.m.Y') }}</span>
+                    <span class="teaser-title">{{ item.title }}</span>
+                </a>
+                {% if item.summary %}<p>{{ item.summary|striptags }}</p>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aktuell keine Neuigkeiten.</p>
+{% endif %}
+
+{% include 'partials/footer.html.twig' %}
