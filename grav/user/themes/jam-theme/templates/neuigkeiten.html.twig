@@ -4,17 +4,25 @@
 
 {% set news_items = page.collection.order('date', 'desc') %}
 {% if news_items|length %}
-    <ul class="content-list">
+    <div class="news-grid">
         {% for item in news_items %}
-            <li class="content-list-entry">
+            <article class="news-card">
                 <a href="{{ item.url }}">
-                    <span class="teaser-date">{{ item.date|date('d.m.Y') }}</span>
-                    <span class="teaser-title">{{ item.title }}</span>
+                    {% if item.media.images|length %}
+                        <img class="news-card-image" src="{{ (item.media.images|first).value.cropZoom(600, 450).url }}" alt="{{ item.title }}" loading="lazy">
+                    {% else %}
+                        <div class="news-card-image"></div>
+                    {% endif %}
+                    <div class="news-card-body">
+                        <span class="news-card-date">{{ item.date|date('d.m.Y') }}</span>
+                        <h3 class="news-card-title">{{ item.title }}</h3>
+                        {% if item.summary %}<p class="news-card-excerpt">{{ item.summary|striptags }}</p>{% endif %}
+                        {% if item.header.author %}<p class="news-card-author">von {{ item.header.author }}</p>{% endif %}
+                    </div>
                 </a>
-                {% if item.summary %}<p>{{ item.summary|striptags }}</p>{% endif %}
-            </li>
+            </article>
         {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>Aktuell keine Neuigkeiten.</p>
 {% endif %}

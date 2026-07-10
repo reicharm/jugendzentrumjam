@@ -1,11 +1,11 @@
 {% include 'partials/header.html.twig' %}
 
 <article class="single-entry">
-    <p class="teaser-date">{{ page.date|date('d.m.Y') }}</p>
+    <p class="news-card-date">{{ page.date|date('d.m.Y') }}{% if page.header.author %} &middot; von {{ page.header.author }}{% endif %}</p>
     <h1>{{ page.title }}</h1>
     {% if page.media.images|length %}
         {% set image = page.media.images|first %}
-        <img class="single-entry-image" src="{{ image.value.cropZoom(1200, 600).url }}" alt="{{ page.title }}">
+        <img class="single-entry-image" src="{{ image.value.cropZoom(1600, 900).url }}" alt="{{ page.title }}">
     {% endif %}
     <div class="page-content">{{ page.content }}</div>
     <p><a href="{{ base_url }}/neuigkeiten">&larr; Zurück zu allen Neuigkeiten</a></p>

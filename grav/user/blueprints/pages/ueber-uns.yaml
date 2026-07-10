@@ -1,0 +1,60 @@
+title: Über uns
+extends@: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          title: Inhalt
+          fields:
+            title:
+              type: text
+              label: Titel
+
+            content:
+              type: markdown-editor
+              label: Einleitungstext
+
+            header.team:
+              type: list
+              label: Mitarbeitende
+              style: vertical
+              collapsed: true
+              fields:
+                .name:
+                  type: text
+                  label: Name
+                .role:
+                  type: text
+                  label: Rolle
+                  placeholder: 'z.B. Jugendarbeiterin'
+                .photo:
+                  type: file
+                  label: Foto
+                  destination: '@self'
+                  accept:
+                    - image/*
+
+            header.rooms:
+              type: list
+              label: Räume
+              style: vertical
+              collapsed: true
+              fields:
+                .name:
+                  type: text
+                  label: Raumname
+                  placeholder: 'z.B. Chillout-Raum'
+                .description:
+                  type: textarea
+                  label: Beschreibung
+                .photo:
+                  type: file
+                  label: Foto
+                  destination: '@self'
+                  accept:
+                    - image/*

@@ -15,14 +15,22 @@
 
 <h2>Anstehende Termine</h2>
 {% if upcoming|length %}
-    <ul class="content-list">
+    <ul class="event-list">
         {% for item in upcoming %}
-            <li class="content-list-entry">
-                <a href="{{ item.url }}">
-                    <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}{% if item.header.event_time %}, {{ item.header.event_time }}{% endif %}</span>
-                    <span class="teaser-title">{{ item.title }}</span>
+            <li class="event-row">
+                <a href="{{ item.url }}" style="display:flex; align-items:center; gap:1rem; flex:1;">
+                    <span class="event-date-badge">
+                        <span class="day">{{ item.header.event_date|date('d') }}</span>
+                        <span class="month">{{ item.header.event_date|date('M') }}</span>
+                    </span>
+                    <span>
+                        <span class="event-title">{{ item.title }}</span>
+                        <p class="event-meta">
+                            {% if item.header.event_time %}{{ item.header.event_time }} Uhr{% endif %}
+                            {% if item.header.event_location %} &middot; {{ item.header.event_location }}{% endif %}
+                        </p>
+                    </span>
                 </a>
-                {% if item.header.event_location %}<p class="teaser-location">{{ item.header.event_location }}</p>{% endif %}
             </li>
         {% endfor %}
     </ul>
@@ -33,12 +41,15 @@
 {% if past|length %}
     <details class="past-events">
         <summary>Vergangene Termine</summary>
-        <ul class="content-list">
+        <ul class="event-list">
             {% for item in past|reverse %}
-                <li class="content-list-entry">
-                    <a href="{{ item.url }}">
-                        <span class="teaser-date">{{ item.header.event_date|date('d.m.Y') }}</span>
-                        <span class="teaser-title">{{ item.title }}</span>
+                <li class="event-row">
+                    <a href="{{ item.url }}" style="display:flex; align-items:center; gap:1rem; flex:1;">
+                        <span class="event-date-badge">
+                            <span class="day">{{ item.header.event_date|date('d') }}</span>
+                            <span class="month">{{ item.header.event_date|date('M') }}</span>
+                        </span>
+                        <span class="event-title">{{ item.title }}</span>
                     </a>
                 </li>
             {% endfor %}

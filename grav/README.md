@@ -53,18 +53,47 @@ Jede Person kann sich danach eigenständig unter `/admin` anmelden.
 
 ## 5. Inhalte pflegen
 
-- **Neue Neuigkeit:** Im Admin-Panel unter "Neuigkeiten" → "Add Page" →
-  Seitentyp **Neuigkeit** wählen → Titel, Text, optional Bild → Speichern.
+- **Neue Neuigkeit (= Blog-Beitrag):** Im Admin-Panel unter "Neuigkeiten" →
+  "Add Page" → Seitentyp **Neuigkeit** wählen → Titel, Text, **Titelbild**
+  (wichtig – erscheint groß auf Startseite, Übersicht und im Beitrag),
+  optional Verfasst-von-Name → Speichern.
 - **Neuer Termin:** Unter "Termine" → "Add Page" → Seitentyp **Termin**
   wählen → Titel, Datum, Uhrzeit, Ort, Beschreibung → Speichern.
 - Termine verschwinden automatisch aus der Übersicht "Anstehende Termine",
   sobald ihr Datum vergangen ist, und landen im ausklappbaren Bereich
   "Vergangene Termine".
+- **Über uns pflegen:** Auf der Seite "Über uns" im Admin-Panel können
+  beliebig viele Mitarbeitende (Name, Rolle, Foto) und Räume (Name,
+  Beschreibung, Foto) als Liste hinzugefügt werden – erscheinen automatisch
+  als Kacheln auf der Seite.
 
-## 6. Design anpassen (sobald Logo/Bilder vorliegen)
+## 6. Instagram-Feed einbinden
+
+Der Footer und die Startseite verlinken automatisch auf
+`instagram.com/jamkremsmuenster` (Handle in `jam-theme.yaml` unter
+`instagram_handle` änderbar). Für einen eingebetteten Live-Feed (nicht nur
+einen Link) empfiehlt sich ein kostenloser Feed-Widget-Dienst, da Instagram
+selbst kein einfaches Embed mehr ohne Entwickler-API anbietet:
+
+1. Bei einem Anbieter wie [elfsight.com](https://elfsight.com) oder
+   [snapwidget.com](https://snapwidget.com) einen kostenlosen "Instagram
+   Feed"-Widget-Code für `@jamkremsmuenster` erzeugen.
+2. Den erhaltenen Embed-Code (HTML/JS-Schnipsel) im Admin-Panel unter
+   **Configuration → Theme** in das Feld `instagram_embed_html` einfügen.
+3. Der Feed erscheint danach automatisch unter dem "Folgt uns"-Button auf
+   der Startseite.
+
+Ohne diesen Schritt funktioniert die Seite trotzdem – es wird dann nur der
+Folgen-Button angezeigt.
+
+## 7. Design anpassen (sobald Logo/Bilder vorliegen)
 
 - Farben, Schrift und Layout: `user/themes/jam-theme/css/theme.css`
   (Variablen am Dateianfang unter `:root`).
 - Logo: aktuell Platzhalter-Text "j@m" in
   `user/themes/jam-theme/templates/partials/header.html.twig` – kann dort
   gegen ein `<img>`-Tag mit echtem Logo getauscht werden.
+- Aktuelle Richtung "Dschungel-Lounge": tiefes Grün (`--color-dark`),
+  Logo-Orange (`--color-primary`) und warmes Creme (`--color-bg`) – bewusst
+  bildlastig (große Titelbilder bei Neuigkeiten) und kontrastreich gehalten,
+  damit es für Jugendliche einladend statt behördlich wirkt.

@@ -2,7 +2,11 @@
 <footer class="site-footer">
     <div class="wrap">
         <p>&copy; {{ "now"|date("Y") }} JugendImpulsZentrum j@m Kremsmünster</p>
-        <p><a href="{{ base_url }}/ueber-uns">Kontakt &amp; Öffnungszeiten</a></p>
+        <p>
+            <a href="{{ base_url }}/ueber-uns">Kontakt &amp; Öffnungszeiten</a>
+            &middot;
+            <a href="https://www.instagram.com/{{ config.theme.instagram_handle }}/" target="_blank" rel="noopener">@{{ config.theme.instagram_handle }} auf Instagram</a>
+        </p>
     </div>
 </footer>
 </body>
