@@ -10,7 +10,15 @@ home_events_count: 4
 
 # Instagram
 instagram_handle: 'jamkremsmuenster'
-# Optional: Embed-Code eines Feed-Widgets (z.B. von elfsight.com oder snapwidget.com,
-# kostenloser Tarif reicht). Einfach den <script>/<div>-Code des Anbieters hier einfügen,
-# dann erscheint der echte Insta-Feed auf der Startseite. Leer lassen für nur den Folgen-Button.
+
+# Eigener Feed über die offizielle Meta Graph API (siehe grav/instagram-feed/
+# und grav/README.md, Abschnitt "Instagram-Feed"). Pfad zum fetch.php relativ
+# zur Domain - nur ändern, falls der Ordner woanders liegt.
+instagram_feed_path: '/instagram-feed/fetch.php'
+
+# Alternative zum Graph-API-Feed: fertiger Embed-Code eines Drittanbieter-
+# Widgets (z.B. elfsight.com oder snapwidget.com). Falls hier etwas eingetragen
+# ist, hat das Vorrang vor dem eigenen Feed oben. Leer lassen, um den eigenen
+# Feed zu nutzen (oder nur den Folgen-Button, falls dieser noch nicht
+# eingerichtet ist).
 instagram_embed_html: ''

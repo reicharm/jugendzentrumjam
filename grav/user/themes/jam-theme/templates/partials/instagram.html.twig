@@ -1,12 +1,57 @@
 <section class="instagram-section">
     <h2>Folgt uns auf Instagram</h2>
-    <p>Die meisten Fotos, Stories und spontanen Updates gibt's zuerst bei uns auf Insta.</p>
+    <p>Die meisten Fotos, Reels und spontanen Updates gibt's zuerst bei uns auf Insta.</p>
     <a class="instagram-cta" href="https://www.instagram.com/{{ config.theme.instagram_handle }}/" target="_blank" rel="noopener">
         @{{ config.theme.instagram_handle }} ansehen
     </a>
+
     {% if config.theme.instagram_embed_html %}
+        {# Drittanbieter-Widget-Code (z.B. Elfsight/SnapWidget), falls hinterlegt #}
         <div class="instagram-embed">
             {{ config.theme.instagram_embed_html|raw }}
         </div>
+    {% else %}
+        {# Eigener Feed über die offizielle Meta Graph API, siehe grav/instagram-feed/ #}
+        <div id="instagram-feed-grid" class="instagram-grid" data-feed-url="{{ config.theme.instagram_feed_path|default('/instagram-feed/fetch.php') }}" hidden></div>
+        <script>
+        (function () {
+            var el = document.getElementById('instagram-feed-grid');
+            if (!el) { return; }
+            fetch(el.getAttribute('data-feed-url'))
+                .then(function (res) { return res.ok ? res.json() : Promise.reject(res); })
+                .then(function (data) {
+                    if (!data.items || !data.items.length) { return; }
+                    data.items.forEach(function (item) {
+                        if (!item.image) { return; }
+                        var link = document.createElement('a');
+                        link.href = item.permalink;
+                        link.target = '_blank';
+                        link.rel = 'noopener';
+                        link.className = 'instagram-grid-item';
+                        link.title = item.caption || 'Instagram-Beitrag ansehen';
+
+                        var img = document.createElement('img');
+                        img.src = item.image;
+                        img.loading = 'lazy';
+                        img.alt = item.caption || 'Instagram-Beitrag von @{{ config.theme.instagram_handle }}';
+                        link.appendChild(img);
+
+                        if (item.type === 'VIDEO') {
+                            var badge = document.createElement('span');
+                            badge.className = 'instagram-grid-badge';
+                            badge.textContent = '▶';
+                            link.appendChild(badge);
+                        }
+
+                        el.appendChild(link);
+                    });
+                    el.hidden = false;
+                })
+                .catch(function () {
+                    /* Feed (noch) nicht eingerichtet oder Instagram gerade nicht erreichbar
+                       - der "Folgt uns"-Button bleibt trotzdem sichtbar. */
+                });
+        })();
+        </script>
     {% endif %}
 </section>
